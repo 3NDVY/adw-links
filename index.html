@@ -34,31 +34,101 @@
       text-align: center;
     }
 
+    /* =========================
+       PROFILE
+    ========================== */
+
     .profile {
       margin-bottom: 30px;
       animation: fadeDown 0.8s ease;
     }
 
+    /* Wrapper foto */
+    .avatar-wrapper {
+      width: 115px;
+      height: 115px;
+      margin: auto;
+
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Ring cahaya berputar */
+    .avatar-ring {
+      position: absolute;
+      inset: 0;
+
+      border-radius: 50%;
+
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 55deg,
+        rgba(255,255,255,.9) 100deg,
+        rgba(255,255,255,.25) 125deg,
+        transparent 160deg,
+        transparent 360deg
+      );
+
+      animation: rotateRing 3s linear infinite;
+
+      filter: blur(1px);
+
+      box-shadow:
+        0 0 15px rgba(255,255,255,.15),
+        0 0 30px rgba(255,255,255,.08);
+    }
+
+    /* Membuat bagian tengah ring transparan */
+    .avatar-ring::after {
+      content: "";
+
+      position: absolute;
+      inset: 3px;
+
+      background: #080808;
+      border-radius: 50%;
+    }
+
+    /* Foto profil */
     .avatar {
-  width: 105px;
-  height: 105px;
-  margin: auto;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
+      width: 105px;
+      height: 105px;
 
-  border: 3px solid rgba(255,255,255,.8);
+      margin: auto;
 
-  box-shadow:
-    0 0 20px rgba(255,255,255,.25),
-    0 0 50px rgba(255,255,255,.08);
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
 
-  transition: .3s ease;
-}
+      position: relative;
+      z-index: 2;
 
-.avatar:hover {
-  transform: scale(1.05);
-}
+      border: 3px solid rgba(255,255,255,.85);
+
+      box-shadow:
+        0 0 15px rgba(255,255,255,.35),
+        0 0 35px rgba(255,255,255,.15);
+
+      animation: profilePulse 3s ease-in-out infinite;
+
+      transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+    }
+
+    /* Efek ketika mouse diarahkan ke foto */
+    .avatar:hover {
+      transform: scale(1.08);
+
+      box-shadow:
+        0 0 25px rgba(255,255,255,.65),
+        0 0 55px rgba(255,255,255,.3),
+        0 0 90px rgba(255,255,255,.1);
+    }
 
     h1 {
       margin-top: 18px;
@@ -72,6 +142,10 @@
       font-size: 14px;
     }
 
+    /* =========================
+       LINKS
+    ========================== */
+
     .links {
       display: flex;
       flex-direction: column;
@@ -82,21 +156,25 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
       min-height: 58px;
       padding: 15px 20px;
 
       color: white;
       text-decoration: none;
+
       font-weight: 600;
       letter-spacing: .5px;
 
       background: rgba(255,255,255,.07);
+
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 16px;
 
       backdrop-filter: blur(10px);
 
       transition: .3s ease;
+
       animation: fadeUp .7s ease both;
     }
 
@@ -110,10 +188,13 @@
 
     .link:hover {
       transform: translateY(-4px) scale(1.02);
+
       background: rgba(255,255,255,.14);
+
       border-color: rgba(255,255,255,.3);
 
-      box-shadow: 0 10px 35px rgba(255,255,255,.08);
+      box-shadow:
+        0 10px 35px rgba(255,255,255,.08);
     }
 
     .icon {
@@ -121,34 +202,104 @@
       font-size: 20px;
     }
 
+    /* =========================
+       FOOTER
+    ========================== */
+
     footer {
       margin-top: 30px;
+
       color: #555;
       font-size: 12px;
       letter-spacing: 1px;
     }
 
+    /* =========================
+       ANIMATIONS
+    ========================== */
+
+    /* Foto membesar dan glow berdenyut */
+    @keyframes profilePulse {
+      0%, 100% {
+        transform: scale(1);
+
+        box-shadow:
+          0 0 15px rgba(255,255,255,.35),
+          0 0 35px rgba(255,255,255,.15);
+      }
+
+      50% {
+        transform: scale(1.04);
+
+        box-shadow:
+          0 0 25px rgba(255,255,255,.55),
+          0 0 60px rgba(255,255,255,.25),
+          0 0 90px rgba(255,255,255,.08);
+      }
+    }
+
+    /* Ring berputar */
+    @keyframes rotateRing {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Profile muncul dari atas */
     @keyframes fadeDown {
       from {
         opacity: 0;
         transform: translateY(-20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
+    /* Tombol muncul dari bawah */
     @keyframes fadeUp {
       from {
         opacity: 0;
         transform: translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 480px) {
+
+      .container {
+        padding: 35px 20px;
+      }
+
+      .avatar-wrapper {
+        width: 110px;
+        height: 110px;
+      }
+
+      .avatar {
+        width: 100px;
+        height: 100px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+    }
+
   </style>
 </head>
 
@@ -156,15 +307,36 @@
 
   <main class="container">
 
+    <!-- PROFILE -->
     <section class="profile">
-      <img class="avatar" src="profile.jpg" alt="AD.W">
+
+      <div class="avatar-wrapper">
+
+        <!-- Ring animasi -->
+        <div class="avatar-ring"></div>
+
+        <!-- Foto profil -->
+        <img
+          class="avatar"
+          src="profile.jpg"
+          alt="AD.W"
+        >
+
+      </div>
 
       <h1>AD.W</h1>
-      <p class="username">@xad.wx</p>
+
+      <p class="username">
+        @xad.wx
+      </p>
+
     </section>
 
+
+    <!-- LINKS -->
     <section class="links">
 
+      <!-- Instagram -->
       <a
         class="link"
         href="https://www.instagram.com/xad.wx"
@@ -175,6 +347,8 @@
         Instagram
       </a>
 
+
+      <!-- TikTok -->
       <a
         class="link"
         href="https://www.tiktok.com/@end.vy"
@@ -185,6 +359,8 @@
         TikTok
       </a>
 
+
+      <!-- Saweria -->
       <a
         class="link"
         href="https://saweria.co/KrAdiNa"
@@ -197,6 +373,8 @@
 
     </section>
 
+
+    <!-- FOOTER -->
     <footer>
       © 2026 AD.W
     </footer>
